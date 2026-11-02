@@ -36,7 +36,6 @@ Em Ajustes, você pode salvar um backup local ou exportar o histórico em CSV. R
 
 A plataforma suportada é **Windows 11 x64**. Os instaladores ficam nas [releases do projeto](https://github.com/gusynth/Krono/releases/latest). A instalação não exige Node.js.
 
-Quem utiliza uma versão experimental numerada como 1.1–1.4 deve consultar [a passagem para a linha pública](docs/building.md#versões-experimentais-e-a-linha-pública-10) antes de instalar a 1.0. O instalador mantém a proteção contra downgrade.
 
 ## Rodar a partir do código
 

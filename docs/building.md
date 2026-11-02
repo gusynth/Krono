@@ -45,11 +45,3 @@ Gera a pasta do aplicativo em `artifacts/packages/win-unpacked`, sem instalar. `
 `npm run dist` gera o setup local em `artifacts/packages`. Não publica no GitHub e não instala no computador. O processo preserva um identificador técnico interno para distinguir pacotes e detectar versões desconhecidas; ele não aparece como número de compilação na apresentação normal do aplicativo.
 
 O manifesto de origem precisa de um checkout Git válido para confirmar o commit. Em uma árvore modificada, o pacote não pode ser anunciado como proveniente de fonte limpa. Não substitua um binário público mantendo a mesma versão.
-
-## Versões experimentais e a linha pública 1.0
-
-A primeira linha pública começa em 1.0.0. O staging utilizou numerações experimentais até 1.4, que não representam lançamentos posteriores dessa linha pública.
-
-O instalador mantém a proteção contra downgrade; portanto, uma instalação experimental 1.4 não será substituída automaticamente por um pacote 1.0. Faça um backup pelo aplicativo, feche o Krono pela bandeja e desinstale a versão experimental sem remover os dados. Depois instale a versão pública. O diretório de dados e a identidade do aplicativo permanecem os mesmos; backups reconhecidos das versões experimentais continuam aceitos.
-
-Esse procedimento de passagem precisa ser validado com o pacote público antes do lançamento. Não é necessário para uma instalação limpa. Não desative proteções do Windows para executar testes ou instaladores.
