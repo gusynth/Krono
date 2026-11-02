@@ -1,0 +1,38 @@
+node_modules/
+dist/
+dist-electron/
+artifacts/
+.test-data/
+test-results/
+playwright-report/
+*.log
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+.env
+.env.*
+!.env.example
+# Fontes originais locais dos avatares; o aplicativo distribui exportações em public/avatars.
+/avatars/
+# Dados locais, credenciais e assinaturas nunca pertencem ao repositório.
+.npmrc
+*.krono-backup
+*.sqlite-journal
+*.db
+*.db-wal
+*.db-shm
+*.pfx
+*.p12
+*.key
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vs/
+.idea/
+# Planejamento privado e instruções locais; arquivos históricos já rastreados ficam no staging.
+/AGENTS.md
+/PLAN.MD
+/PLANS.md
+/RESUMO.MD
+/ROADMAP.md
+/roadmap.md

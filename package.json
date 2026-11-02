@@ -1,0 +1,125 @@
+{
+  "name": "krono",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicativo desktop de foco, hábitos e registros de estudo",
+  "author": "gusynth",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist-electron/main.cjs",
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "npm run build && electron .",
+    "dev:web": "npm run build && vite preview --host 127.0.0.1",
+    "study:build": "tsc --noEmit && vite build --config vite.study.config.ts",
+    "study": "npm run study:build && vite preview --config vite.study.config.ts --host 127.0.0.1",
+    "test:study": "npm run study:build && playwright test tests/study",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest run --dir tests/unit",
+    "test:integration": "node scripts/integration.mjs",
+    "test:e2e": "npm run build && npm run study:build && playwright test tests/e2e",
+    "test:motion": "npm run build && playwright test tests/visual-motion",
+    "test:performance": "npm run build && node scripts/performance.mjs",
+    "test:release": "node scripts/release-gates.mjs",
+    "build": "tsc --noEmit && vite build && node scripts/build-electron.mjs",
+    "pack": "npm run build && electron-builder --win --x64 --dir",
+    "test:packaged": "node scripts/integration.mjs --packaged",
+    "dist": "node scripts/candidate-manifest.mjs --invalidate && npm run build && node scripts/nsis-engine.mjs && node scripts/build-installer.mjs && node scripts/native-setup.mjs && node scripts/verify-brand-icons.mjs && node scripts/candidate-manifest.mjs",
+    "icons:export": "node scripts/export-brand-icons.mjs",
+    "test:brand": "node scripts/verify-brand-icons.mjs",
+    "test:footprint": "node scripts/package-footprint.mjs",
+    "test:installer-policy": "node scripts/installer-policy.mjs",
+    "test:installer-page": "node scripts/installer-page.mjs",
+    "test:build-proxy": "node scripts/build-proxy-test.mjs",
+    "test:setup": "node scripts/native-setup.mjs --preview && node scripts/setup-consent-test.mjs && node scripts/setup-engine-test.mjs && node scripts/setup-removal-test.mjs",
+    "format": "prettier --write src electron shared tests scripts *.ts *.mjs package.json",
+    "format:check": "prettier --check src electron shared tests scripts *.ts *.mjs package.json"
+  },
+  "build": {
+    "appId": "com.krono.desktop",
+    "productName": "Krono",
+    "directories": {
+      "output": "artifacts/packages"
+    },
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "package.json",
+      "LICENSE",
+      "ASSETS_LICENSE.md",
+      "THIRD_PARTY_NOTICES.md",
+      "!dist-electron/**/*.map",
+      "!node_modules/{react,react-dom,scheduler,lucide-react,motion,framer-motion,motion-dom,motion-utils,tslib,zod,node-addon-api}{,/**/*}",
+      "!node_modules/better-sqlite3/{src,deps}{,/**/*}",
+      "!node_modules/better-sqlite3/{binding.gyp,build/*.vcxproj,build/*.vcxproj.filters,build/Release/obj/**,build/Debug/**}",
+      "!node_modules/better-sqlite3/prebuilds/{linux*,darwin*,win32-arm64}.node"
+    ],
+    "compression": "maximum",
+    "asar": true,
+    "asarUnpack": [
+      "**/*.node",
+      "dist-electron/assets/*.ico"
+    ],
+    "npmRebuild": true,
+    "win": {
+      "electronLanguages": [
+        "pt-BR",
+        "en-US"
+      ],
+      "icon": "assets/desktop/brand/principal.ico",
+      "target": "nsis",
+      "signExecutable": false
+    },
+    "nsis": {
+      "installerIcon": "assets/desktop/brand/principal.ico",
+      "uninstallerIcon": "assets/desktop/brand/principal.ico",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "include": "build/installer.nsh",
+      "installerLanguages": [
+        "pt_BR"
+      ]
+    },
+    "artifactName": "Krono-${version}-${arch}.${ext}"
+  },
+  "dependencies": {
+    "better-sqlite3": "13.0.3",
+    "lucide-react": "1.59.0",
+    "motion": "14.3.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "4.6.7"
+  },
+  "overrides": {
+    "@electron/get@3.1.0": {
+      "global-agent": "4.1.3"
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@tailwindcss/vite": "4.3.3",
+    "@types/better-sqlite3": "9.6.0",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "electron": "44.9.1",
+    "electron-builder": "26.15.3",
+    "esbuild": "0.28.2",
+    "eslint": "10.13.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "prettier": "3.9.10",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
+  }
+}

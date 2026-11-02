@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="230" viewBox="0 0 1200 230" role="img" aria-labelledby="title description">
+  <title id="title">Krono</title>
+  <desc id="description">Foco, hábitos e histórico no seu computador. Identidade editorial em marrom mineral e marfim.</desc>
+  <defs><linearGradient id="stone" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#322a20"/><stop offset="1" stop-color="#1b1815"/></linearGradient></defs>
+  <rect width="1200" height="230" rx="14" fill="url(#stone)"/>
+  <text x="58" y="111" fill="#eee7db" font-family="Georgia,serif" font-size="76" letter-spacing="-2">Krono</text>
+  <text x="62" y="157" fill="#c4b8a6" font-family="Segoe UI,Arial,sans-serif" font-size="22">Foco, hábitos e histórico no seu computador.</text>
+  <path d="M62 188H1138" stroke="#79674b" stroke-opacity=".65"/>
+  <text x="1138" y="77" text-anchor="end" fill="#c4b8a6" font-family="Segoe UI,Arial,sans-serif" font-size="16" letter-spacing="2">WINDOWS · LOCAL · SEM CONTA</text>
+</svg>

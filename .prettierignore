@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-electron
+artifacts
+.test-data
+test-results
+playwright-report
+package-lock.json
+AGENTS.md
+PLAN.MD
+PLANS.md
+RESUMO.MD
+ROADMAP.md
+roadmap.md
+docs/evidence
+docs/studies
+docs/design-studies

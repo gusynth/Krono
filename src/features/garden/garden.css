@@ -1,0 +1,257 @@
+.garden-entry {
+  max-width: 1104px;
+  margin: 24px auto 0;
+}
+.clean-study .garden-launch {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font:
+    500 12px Inter,
+    system-ui,
+    sans-serif;
+  min-height: 40px;
+  padding: 10px 14px;
+  border: 1px solid var(--ui-control-edge);
+  border-radius: 8px;
+  color: var(--clean-secondary);
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+.garden-beta {
+  display: inline-block;
+  font:
+    500 10px/1.4 Inter,
+    system-ui,
+    sans-serif;
+  border: 1px solid var(--ui-control-edge);
+  padding: 2px 6px;
+  border-radius: 5px;
+  color: var(--clean-text);
+}
+.clean-study .garden-dialog {
+  position: relative;
+  width: min(820px, calc(100vw - 32px));
+  padding: 28px;
+}
+.clean-study .garden-dialog button {
+  font:
+    500 12px/1.4 Inter,
+    system-ui,
+    sans-serif;
+  min-height: 38px;
+  padding: 9px 13px;
+  color: var(--clean-text);
+  background: var(--ui-control);
+  border: 1px solid var(--ui-control-edge);
+  border-radius: 8px;
+  box-shadow: none;
+  cursor: pointer;
+}
+.clean-study .garden-dialog button:hover:not(:disabled) {
+  background: var(--ui-control-hover);
+}
+.clean-study .garden-dialog button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.clean-study .garden-dialog button[data-primary='true'] {
+  background: var(--clean-focus);
+  color: var(--clean-ink);
+}
+.clean-study .garden-dialog button[data-primary='true']:hover:not(:disabled) {
+  background: var(--clean-focus);
+  color: var(--clean-ink);
+}
+.clean-study .garden-dialog .garden-close {
+  min-height: 32px;
+  padding: 0;
+}
+.clean-study .garden-dialog button:focus-visible {
+  outline: 2px solid var(--clean-text);
+  outline-offset: 3px;
+}
+.garden-dialog > h2 {
+  padding-right: 44px;
+}
+.clean-study .garden-close {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  width: 32px;
+  height: 32px;
+  min-height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+}
+.clean-study .garden-beta-note {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 24px;
+  color: var(--clean-secondary);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.garden-introduction {
+  max-width: 66ch;
+  margin: auto;
+}
+.garden-introduction h3 {
+  font:
+    400 25px/1.3 Georgia,
+    serif;
+  margin: 24px 0 16px;
+  color: var(--clean-text);
+}
+.garden-introduction p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--clean-secondary);
+}
+.garden-introduction h4 {
+  margin: 24px 0 12px;
+  font-size: 14px;
+}
+.garden-chapter-guide {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.garden-chapter-guide li {
+  padding: 12px 0;
+  border-top: 1px solid var(--ui-edge);
+}
+.garden-chapter-guide li > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.garden-chapter-guide span {
+  font-size: 12px;
+  color: var(--clean-secondary);
+}
+.garden-chapter-guide p {
+  margin: 5px 0 0;
+}
+.garden-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 14px;
+}
+.garden-heading h3 {
+  margin: 0;
+  font:
+    400 26px Georgia,
+    serif;
+}
+.garden-heading span,
+.garden-work-state {
+  font-size: 12px;
+  color: var(--clean-secondary);
+  line-height: 1.6;
+}
+.garden-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  border-radius: 10px;
+  background: var(--ui-inset);
+}
+.garden-chapters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.clean-study .garden-chapters button {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 9px 12px;
+  font-size: 12px;
+}
+.clean-study .garden-chapters button[aria-pressed='true'] {
+  background: var(--ui-control-hover);
+  border-color: var(--clean-text);
+  color: var(--clean-text);
+}
+.garden-chapters small {
+  font-size: 10px;
+}
+.garden-progress-label {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--clean-secondary);
+}
+.garden-track {
+  height: 5px;
+  border-radius: 9px;
+  background: var(--ui-inset);
+  overflow: hidden;
+}
+.garden-track i {
+  display: block;
+  height: 100%;
+  background: var(--clean-focus);
+}
+.garden-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ui-edge);
+}
+.garden-footer > button:first-child {
+  margin-right: auto;
+}
+.clean-study .garden-footer button {
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .clean-study .garden-dialog {
+    padding: 22px 18px;
+  }
+  .clean-study .garden-close {
+    right: 16px;
+    top: 18px;
+  }
+  .garden-footer {
+    justify-content: flex-start;
+  }
+}
+@media (forced-colors: active) {
+  .garden-canvas {
+    forced-color-adjust: none;
+  }
+  .garden-beta {
+    border-color: CanvasText;
+  }
+  .garden-track i {
+    background: Highlight;
+  }
+  .clean-study .garden-dialog button {
+    background: ButtonFace !important;
+    color: ButtonText !important;
+    border-color: ButtonText;
+  }
+}
