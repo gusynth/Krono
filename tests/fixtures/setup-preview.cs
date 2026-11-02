@@ -53,8 +53,12 @@ namespace Krono.Setup {
                 }
                 Check(Policy.Classify("","",Identity.Version,Identity.Build)==Decision.Install,"clean");
                 Check(Policy.Classify(Identity.Version,Identity.Build,Identity.Version,Identity.Build)==Decision.Reinstall,"exact candidate reinstall");
-                Check(Policy.Classify("1.3.0","21",Identity.Version,Identity.Build)==Decision.Update,"public 1.3.0 updates to candidate");
-                Check(Policy.Classify("1.3.1","25",Identity.Version,Identity.Build)==Decision.Update,"stable 1.3.1 updates to candidate");
+                foreach(var baseline in new[]{new[]{"1.3.0","21"},new[]{"1.3.1","25"}}){
+                    int versionOrder=new Version(Identity.Version).CompareTo(new Version(baseline[0]));
+                    int buildOrder=Int64.Parse(Identity.Build).CompareTo(Int64.Parse(baseline[1]));
+                    Decision expected=versionOrder<0?Decision.Downgrade:versionOrder>0?Decision.Update:buildOrder<0?Decision.Downgrade:buildOrder>0?Decision.Update:Decision.Reinstall;
+                    Check(Policy.Classify(baseline[0],baseline[1],Identity.Version,Identity.Build)==expected,"experimental baseline follows semantic version and build; public 1.0 never downgrades silently");
+                }
                 Check(Policy.Classify(Identity.Version,(int.Parse(Identity.Build)+1).ToString(),Identity.Version,Identity.Build)==Decision.Downgrade,"next build blocked");
                 Check(Policy.Classify("2.0.0","1",Identity.Version,Identity.Build)==Decision.Downgrade,"newer version");
                 Check(Policy.Classify("0.0.9","",Identity.Version,Identity.Build)==Decision.Update,"older version");
