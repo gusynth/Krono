@@ -10,6 +10,8 @@ class SetupPackageProbe {
             if(assembly.GetType("Krono.Setup.NativeHost")==null || assembly.GetType("Krono.Setup.PreviewHost")!=null || assembly.GetType("Krono.Setup.SelfTests")!=null)throw new Exception("Wrong production types");
             var form=assembly.GetType("Krono.Setup.SetupForm");
             if(form.GetMethod("RenderPreview",BindingFlags.Instance|BindingFlags.NonPublic)!=null)throw new Exception("Preview method shipped");
+            var identity=assembly.GetType("Krono.Setup.Identity");
+            if(identity==null || (string)identity.GetField("EngineSha256").GetRawConstantValue()!=args[1] || (string)identity.GetField("RemoveSha256").GetRawConstantValue()!=args[2])throw new Exception("Production verification constants mismatch");
             string hash=Hash(assembly.GetManifestResourceStream("engine"));
             if(hash!=args[1])throw new Exception("Engine digest mismatch");
             if(Hash(assembly.GetManifestResourceStream("remove-engine"))!=args[2])throw new Exception("Remove engine digest mismatch");
