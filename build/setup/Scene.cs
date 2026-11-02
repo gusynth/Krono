@@ -21,6 +21,7 @@ namespace Krono.Setup {
             double dock=reduced?1:Ease(.8,1.44,seconds);
             return new RectangleF((float)(270+(34-270)*dock),(float)(140+(16-140)*dock),(float)(180+(44-180)*dock),(float)(180+(44-180)*dock));
         }
+        internal static float HeaderLineY(Size size){return 68*size.Height/480f;}
         public void Paint(Graphics g,Size size,double seconds,bool reduced,bool animate){
             bool hc=SystemInformation.HighContrast;
             g.Clear(hc?SystemColors.Window:Material.Canvas);
@@ -35,7 +36,7 @@ namespace Krono.Setup {
             }
             if(reduced||seconds>=1.44){
                 using(var format=new StringFormat{LineAlignment=StringAlignment.Center})Material.DrawText(g,"Krono",name,hc?SystemColors.WindowText:Material.Text,new RectangleF(88*sx,16*sy,180*sx,44*sy),format);
-                using(var pen=new Pen(hc?SystemColors.WindowText:Material.Border))g.DrawLine(pen,40*sx,68*sy,size.Width-40*sx,68*sy);
+                using(var pen=new Pen(hc?SystemColors.WindowText:Material.Border))g.DrawLine(pen,40*sx,HeaderLineY(size),size.Width-40*sx,HeaderLineY(size));
             }
         }
         public void Dispose(){logo.Dispose();name.Dispose();}

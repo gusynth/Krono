@@ -88,7 +88,7 @@ namespace Krono.Setup {
             directory.Visible=pathLabel.Visible=browse.Visible=!scanning&&!busy&&!completed&&!error&&!removeSelected&&!Blocked&&host.Decision!=Decision.Legacy;
             directory.Input.ReadOnly=existing;browse.Enabled=!existing;
             consent.Visible=!scanning&&!busy&&!completed&&!error&&(removeSelected||host.Decision==Decision.Legacy);
-            consent.Text=removeSelected?"Confirmo a remoção do aplicativo. Histórico e preferências serão mantidos.":"Entendi: a compilação instalada é desconhecida. Quero reinstalar.";
+            consent.Text=removeSelected?"Confirmo a remoção do aplicativo. Histórico e preferências serão mantidos.":"Entendi: não foi possível identificar a versão instalada. Quero reinstalar.";
             progress.Visible=scanning||busy;
             if(scanning){title.Text="Verificando instalação";subtitle.Text="Consultando os registros locais do Krono.";detail.Text="Nenhuma busca nos seus documentos.";next.Text="Verificando…";}
             else if(completed){title.Text=removeSelected?"Krono desinstalado":"Tudo pronto";subtitle.Text=host.Preview?"Simulação concluída. Nenhum aplicativo foi alterado.":removeSelected?"O aplicativo foi removido. Seus registros foram preservados.":rebootRequired?"Os arquivos foram preparados. Reinicie o Windows antes de abrir.":"A instalação foi confirmada. Abra o Krono para começar.";detail.Text=message;next.Text=removeSelected||host.Preview||rebootRequired?"Fechar":"Abrir o Krono  →";}
@@ -120,9 +120,10 @@ namespace Krono.Setup {
 #if KRONO_PREVIEW
             layoutPasses++;
 #endif
-            float s=DeviceDpi/96f;int w=(int)Math.Min(740*s,ClientSize.Width-80*s),h=(int)(ClientSize.Height-128*s);
+            float s=DeviceDpi/96f;int top=(int)Math.Ceiling(Scene.HeaderLineY(ClientSize)+24*s);
+            int w=(int)Math.Min(740*s,ClientSize.Width-80*s),h=ClientSize.Height-top-(int)(24*s);
             double enter=transitionStart<0?1:Scene.Ease(transitionStart,transitionStart+.24,Time);
-            card.SetBounds((ClientSize.Width-w)/2,(int)(88*s+(IsReduced?0:(1-enter)*7*s)),w,h);
+            card.SetBounds((ClientSize.Width-w)/2,top+(int)(IsReduced?0:(1-enter)*7*s),w,h);
             int pad=(int)(24*s),inside=w-pad*2;
             bool choices=host.Decision!=Decision.Install&&!scanning&&!busy&&!completed&&!error;
             bool showDirectory=!scanning&&!busy&&!completed&&!error&&!removeSelected&&!Blocked&&host.Decision!=Decision.Legacy;
@@ -163,8 +164,13 @@ namespace Krono.Setup {
             using(var b=new Bitmap(Width,Height)){DrawToBitmap(b,ClientRectangle);b.Save(path,System.Drawing.Imaging.ImageFormat.Png);}
             foreach(var c in new Control[]{title,subtitle,detail,next,version}){if(!card.ClientRectangle.Contains(c.Bounds))throw new Exception("Overflow: "+c.Text);if(c is Label){var measured=TextRenderer.MeasureText(c.Text,c.Font,new Size(c.Width,int.MaxValue),TextFormatFlags.WordBreak|TextFormatFlags.TextBoxControl);if(measured.Height>c.Height+2)throw new Exception("Texto cortado: "+c.Text);}}
             if(host.Decision!=Decision.Install&&!scanning&&!busy&&!completed&&!error&&!removeSelected&&!Blocked&&host.Decision!=Decision.Legacy&&directory.Bounds.IntersectsWith(install.Bounds))throw new Exception("Sobreposição de ações e diretório");
+            float scale=DeviceDpi/96f;
+            if(card.Top<Scene.HeaderLineY(ClientSize)+23*scale)throw new Exception("Card invadiu o cabeçalho");
+            if(ClientSize.Height-card.Bottom<23*scale)throw new Exception("Margem externa inferior insuficiente");
             int inset=(int)(24*DeviceDpi/96f);var safe=new Rectangle(inset,inset,card.Width-2*inset,card.Height-2*inset);
             foreach(var c in new Control[]{title,subtitle,detail,next,version,motion,directory,browse,install,remove,consent})if(!safe.Contains(c.Bounds))throw new Exception("Margem interna insuficiente: "+c.Text);
+            if(motion.Visible&&detail.Visible&&detail.Bounds.IntersectsWith(motion.Bounds))throw new Exception("Descrição invadiu opções do rodapé");
+            if(next.Visible&&detail.Visible&&detail.Bounds.IntersectsWith(next.Bounds))throw new Exception("Descrição invadiu ação principal");
             if(motion.Bottom+12*DeviceDpi/96>next.Top)throw new Exception("Rodapé sem intervalo de grupo");
         }
         internal void ProbeInteractions(){
