@@ -16,9 +16,12 @@ Um foco pode ser vinculado a um hábito de tempo. Os hábitos de ação têm con
 
 **O tempo de pausa, as sessões interrompidas e o período com o aplicativo fechado não viram foco concluído.**
 
-![Tela de Foco do Krono](public/welcome/focus.png)
-
-<sub>Captura do aplicativo com dados de demonstração.</sub>
+<p align="center">
+  <img src="public/welcome/focus.png" width="760" alt="Tela de Foco do Krono" />
+</p>
+<p align="center">
+  <sub>Captura do aplicativo com dados de demonstração.</sub>
+</p>
 
 ## Um espaço que acompanha seus focos
 
