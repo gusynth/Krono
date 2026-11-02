@@ -255,3 +255,40 @@
     border-color: ButtonText;
   }
 }
+.clean-study .garden-invitation {
+  width: min(540px, calc(100vw - 40px));
+}
+.garden-invitation-symbol {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 20px 0 16px;
+  border: 1px solid var(--ui-control-edge);
+  border-radius: 14px;
+  background: var(--ui-control);
+}
+.garden-invitation > p {
+  color: var(--clean-secondary);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 12px 0;
+}
+.garden-invitation > p:first-of-type {
+  color: var(--clean-text);
+}
+.garden-invitation .garden-invitation-note {
+  font-size: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--clean-border);
+}
+.garden-invitation .garden-beta {
+  margin-right: 6px;
+}
+.clean-study .garden-invitation .dialog-actions {
+  margin-top: 24px;
+  gap: 10px;
+}
+.garden-invitation [role='alert'] {
+  color: var(--clean-text);
+}

@@ -35,6 +35,7 @@ import { StudyNavigation, type StudyDestination as Destination } from './StudyNa
 import { HabitExample } from './HabitExample';
 import type { StorageStatus } from '../app/useFoundationStatus';
 import { Garden } from '../features/garden/Garden';
+import { GardenInvitation } from '../features/garden/GardenInvitation';
 export function CleanStudy({ storageStatus = 'web' }: { storageStatus?: StorageStatus }) {
   const habits = useHabits();
   const [destination, setDestination] = useState<Destination>(() => {
@@ -405,6 +406,12 @@ export function CleanStudy({ storageStatus = 'web' }: { storageStatus?: StorageS
           visible={visible}
           ambient={appearance.ambient && !reducedEffects && appearance.theme !== 'original'}
           onOpenChange={setIntroductionActive}
+        />
+        <GardenInvitation
+          ready={storageStatus === 'ready'}
+          available={!mini.active && !introductionActive}
+          visible={visible}
+          onEnabled={() => navigate('profile')}
         />
         <ShellDialog />
       </div>

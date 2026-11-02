@@ -121,7 +121,10 @@ void app.whenReady().then(async () => {
   if (process.env.KRONO_TEST_WELCOME !== '1' && !desktop.preferences().introduction)
     await desktop.update({
       expectedRevision: desktop.preferences().revision,
-      patch: { introduction: { version: 1, step: 0, completed: true } },
+      patch: {
+        introduction: { version: 1, step: 0, completed: true },
+        garden: { version: 1, introductionSeen: false, enabled: false },
+      },
     });
   const window = createMainWindow(root, false);
   const mini = new MiniMode(window);
